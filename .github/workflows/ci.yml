@@ -38,6 +38,8 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
+    # Uses 'production' env secrets for PRs targeting main, 'staging' for PRs targeting staging
+    environment: ${{ github.base_ref == 'main' && 'production' || 'staging' }}
     env:
       NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
       NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
