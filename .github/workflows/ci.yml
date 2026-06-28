@@ -5,6 +5,19 @@ on:
     branches: [main, staging]
 
 jobs:
+  enforce-branch-flow:
+    name: Enforce Branch Flow
+    runs-on: ubuntu-latest
+    steps:
+      - name: Block direct feature → main merges
+        if: github.base_ref == 'main' && github.head_ref != 'staging'
+        run: |
+          echo "❌ PRs to main must come from 'staging' only."
+          echo "   Source branch: ${{ github.head_ref }}"
+          echo "   Merge via staging first: feature/* → staging → main"
+          exit 1
+
+
   typecheck:
     name: Type Check
     runs-on: ubuntu-latest

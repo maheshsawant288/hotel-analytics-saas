@@ -1,6 +1,5 @@
-import { createClient } from '@supabase/supabase-js';
-
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
-
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+// Re-export from specific clients — use these instead of this file directly.
+// For Server Components / Route Handlers: import { createClient } from '@/lib/supabase/server'
+// For Client Components:                  import { createClient } from '@/lib/supabase/client'
+export { createClient as createServerClient } from '@/lib/supabase/server';
+export { createClient as createBrowserClient } from '@/lib/supabase/client';
