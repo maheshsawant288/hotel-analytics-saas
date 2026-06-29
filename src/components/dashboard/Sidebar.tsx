@@ -7,8 +7,8 @@ import { createClient } from '@/lib/supabase/client';
 
 const NAV = [
   { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
-  { href: '/upload', label: 'Upload Data', icon: Upload },
-  { href: '/settings', label: 'Settings', icon: Settings },
+  { href: '/dashboard/upload', label: 'Upload Data', icon: Upload },
+  { href: '/dashboard/settings', label: 'Settings', icon: Settings },
 ];
 
 export default function Sidebar() {
