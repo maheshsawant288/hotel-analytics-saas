@@ -8,5 +8,13 @@ export default async function DashboardPage() {
 
   if (!user) redirect('/auth/login');
 
+  const { data: hotel } = await supabase
+    .from('hotels')
+    .select('id')
+    .eq('owner_id', user.id)
+    .single();
+
+  if (!hotel) redirect('/onboarding');
+
   return <DashboardClient userId={user.id} />;
 }
