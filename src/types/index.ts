@@ -18,14 +18,48 @@ export type SubscriptionPlan = 'starter' | 'growth' | 'pro';
 
 export type SubscriptionStatus = 'active' | 'cancelled' | 'past_due';
 
+export type PropertyCategory = 'hotel' | 'resort' | 'boutique' | 'guest_house' | 'heritage';
+
+export type BedConfiguration = 'single' | 'double' | 'twin' | 'multiple';
+
 export interface Hotel {
   id: string;
   owner_id: string;
   name: string;
   address: string | null;
   city: string | null;
+  state: string | null;
   star_rating: number | null;
   total_rooms: number | null;
+  property_category: PropertyCategory | null;
+  check_in_time: string | null;
+  check_out_time: string | null;
+  peak_rooms_saleable: number | null;
+  gst_number: string | null;
+  pan_number: string | null;
+  hotel_phone: string | null;
+  pincode: string | null;
+  year_established: number | null;
+  created_at: string;
+}
+
+export interface RoomType {
+  id: string;
+  hotel_id: string;
+  name: string;
+  room_count: number;
+  base_rate: number;
+  max_occupancy: number;
+  bed_configuration: BedConfiguration;
+  created_at: string;
+}
+
+export interface HotelChannel {
+  id: string;
+  hotel_id: string;
+  channel: Channel;
+  is_active: boolean;
+  commission_rate: number | null;
   created_at: string;
 }
 
