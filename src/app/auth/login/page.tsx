@@ -1,12 +1,22 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { createClient } from '@/lib/supabase/client';
 
+const ERROR_MESSAGES: Record<string, string> = {
+  auth_callback_failed: 'Email verification failed. Please try signing in or request a new link.',
+};
+
 export default function LoginPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const urlError = searchParams.get('error');
+  const callbackError = urlError
+    ? (ERROR_MESSAGES[urlError] ?? 'Something went wrong. Please try again.')
+    : '';
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -41,9 +51,7 @@ export default function LoginPage() {
 
           <form onSubmit={handleLogin} className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-zinc-700 mb-1">
-                Email
-              </label>
+              <label className="block text-sm font-medium text-zinc-700 mb-1">Email</label>
               <input
                 type="email"
                 required
@@ -55,9 +63,7 @@ export default function LoginPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-zinc-700 mb-1">
-                Password
-              </label>
+              <label className="block text-sm font-medium text-zinc-700 mb-1">Password</label>
               <input
                 type="password"
                 required
@@ -68,9 +74,9 @@ export default function LoginPage() {
               />
             </div>
 
-            {error && (
+            {(callbackError || error) && (
               <p className="text-sm text-red-600 bg-red-50 px-3 py-2 rounded-lg">
-                {error}
+                {error || callbackError}
               </p>
             )}
 
