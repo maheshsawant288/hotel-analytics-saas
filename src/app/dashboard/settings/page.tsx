@@ -7,11 +7,9 @@ export default async function SettingsPage() {
   if (!user) redirect('/auth/login');
 
   return (
-    <div className="flex min-h-screen bg-zinc-50">
-      <main className="flex-1 p-8">
-        <h1 className="text-xl font-bold text-zinc-900">Settings</h1>
-        <p className="text-sm text-zinc-500 mt-1">Account & billing settings — coming soon.</p>
-      </main>
+    <div>
+      <h1 className="text-xl font-bold text-zinc-900">Settings</h1>
+      <p className="text-sm text-zinc-500 mt-1">Account & billing settings — coming soon.</p>
     </div>
   );
 }
